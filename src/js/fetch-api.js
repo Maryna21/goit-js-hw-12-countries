@@ -2,19 +2,20 @@ import countryCardsTpl from '../templates/country-cards.hbs';
 import API from './api-service';
 import getRefs from './get-refs';
 const debounce = require('lodash.debounce');
+import { alert, defaultModules } from '@pnotify/core';
 
 const refs = getRefs();
-refs.searchForm.addEventListener('submit', debounce(onSearch, 300));
+refs.searchForm.addEventListener('input', debounce(onSearch, 300));
 
 function onSearch(e) {
     e.preventDefault();
-    const form = e.currentTarget;
-    const searchQuery = form.elements.query.value;
+    const searchQuery = e.target.value;
+    console.log(searchQuery);
 
     API.fetchCountry(searchQuery)
         .then(renderCountryCard)
-        .catch(onFetchError).finally(() => 
-    form.reset());
+        .catch(onFetchError)
+        .finally(clearResult);
 }
 
 function renderCountryCard (country){
@@ -28,10 +29,12 @@ function renderCountryCard (country){
     if (country.length > 10) {
         console.log('to much');
     }
-
-
 }
 
 function onFetchError() {
     alert('Щось пішло не так! ')
+}
+function clearResult() {
+        refs.searchForm.value = '';
+        refs.cardContainer.innerHTML = '';
 }
