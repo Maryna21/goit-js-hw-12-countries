@@ -15,3 +15,34 @@ body {
   line-height: 1.5;
   color: #2a2a2a;
 }
+img {
+  display: block;
+  width: 400px;
+  height: 300px;
+}
+input {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 70px;
+  margin-bottom: 50px;
+}
+
+input[type='text'] {
+  font-size: 25px;
+  text-align: center;
+}
+.card {
+  display: flex;
+  justify-content: space-around;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+p {
+  font-size: 20px;
+}
+b {
+  margin-right: 20px;
+}

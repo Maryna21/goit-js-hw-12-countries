@@ -1,11 +1,14 @@
-const BASE_URL = 'https://restcountri.eu/rest/v2/';
+const BASE_URL = 'https://restcountries.eu/rest/v2/name/';
 
 function fetchCountry(countryName) {
-    return fetch(`${BASE_URL}name/${countryName}`)
+    return fetch(BASE_URL+`${countryName}`)
       .then(response => {
-        console.log(response);
-    if (response.ok) {response.json()};
-          if (response.status == 404) { throw new Error('Not found') };
+		if (response.ok) {
+			return response.json()
+		}
+		else if (response.status == 404) { 
+			throw new Error('Not found') 
+		};
           
     throw new Error('Error fetching data');
   })
